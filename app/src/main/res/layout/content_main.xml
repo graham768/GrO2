@@ -12,8 +12,64 @@
     tools:context="fr3380ot.com.gro2.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tableLayout">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello John Smith, lets look at your progress for today!"
+                android:id="@+id/textView2"
+                android:layout_column="2"
+                android:layout_above="@+id/tableLayout"
+                android:layout_centerHorizontal="false"
+                android:autoText="false" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@mipmap/ic_waterdrop"
+                android:layout_column="1" />
+
+            <ProgressBar
+                style = "?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:max="100"
+                android:progress="0"
+                android:indeterminate="false"
+                android:layout_column="2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                style = "?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar2"
+                android:max="100"
+                android:progress="0"
+                android:indeterminate="false"
+                android:layout_column="2" />
+        </TableRow>
+
+    </TableLayout>
+
 </RelativeLayout>
