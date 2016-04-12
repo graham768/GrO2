@@ -20,6 +20,8 @@ public class add_habit extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_habit);
+
+        //title
         title = (EditText) findViewById(R.id.titleEditText);
 
         //diffSpinner Setup
