@@ -7,6 +7,10 @@
     <string name="action_settings">Settings</string>
 
     <string name="add_habit">Add New Habit</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    S<string name="delete">Delete</string>
     <string name="title">Title</string>
     <string name="difficulty">Difficulty</string>
     <string name="frequency">Frequency</string>
