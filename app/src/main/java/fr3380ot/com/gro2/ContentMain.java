@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class content_main extends ListActivity{
+public class ContentMain extends ListActivity{
 
     Intent intent;
     TextView habitId;
@@ -40,7 +40,7 @@ public class content_main extends ListActivity{
                     habitId = (TextView) view.findViewById(R.id.habitId);
                     String habitIdValue = habitId.getText().toString();
 
-                    //TODO: Research getApplication() and the use of this statement
+                    //TODO: EditHabit.java
                     intent = new Intent(getApplication(), EditHabit.class);
 
                     intent.putExtra("habitId", habitIdValue);
