@@ -18,6 +18,7 @@
 
 
     <string name="habits">Habits</string>
+    <string name="greeting">Hello John Smith, lets look at your progress for today!</string>
 
     <string-array name="difficultyArray">
         <item name="easy">Easy</item>

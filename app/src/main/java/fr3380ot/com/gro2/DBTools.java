@@ -120,7 +120,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
         habitArrayList = new ArrayList<HashMap<String, String>>();
 
-        String selectQuery = "SELECT  * FROM contacts";
+        String selectQuery = "SELECT  * FROM habits";
 
         // Open a database for reading and writing
 
