@@ -28,7 +28,7 @@ public class ContentMain extends ListActivity{
         ArrayList<HashMap<String, String>> habitList = dbTools.getAllHabits();
         dbTools.getAllHabits();
 
-        //No habits created
+        //If there are habits created
         if(habitList.size() != 0) {
             ListView listView = getListView();
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -40,7 +40,6 @@ public class ContentMain extends ListActivity{
                     habitId = (TextView) view.findViewById(R.id.habitId);
                     String habitIdValue = habitId.getText().toString();
 
-                    //TODO: EditHabit.java
                     intent = new Intent(getApplication(), EditHabit.class);
 
                     intent.putExtra("habitId", habitIdValue);

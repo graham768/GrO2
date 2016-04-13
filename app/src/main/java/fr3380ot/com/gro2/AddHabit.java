@@ -24,7 +24,6 @@ public class AddHabit extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_habit);
 
-        //TODO: Finish AddHabit
         title = (EditText) findViewById(R.id.titleEditText);
 
         //diffSpinner Setup
@@ -44,24 +43,23 @@ public class AddHabit extends Activity {
         freqSpinner.setAdapter(adapter2);
     }
 
+    //TODO: If field isn't answered, throw error
     public void addHabit(View view) {
 
         HashMap<String, String> queryValuesMap = new HashMap<>();
 
         queryValuesMap.put("title", title.getText().toString());
         //TODO:Setup spinner methods to get spinner value
-        //queryValuesMap.put("difficulty", diffSpinner.)
-        //queryValuesMap.put("frequency", freqSpinner.)
+        queryValuesMap.put("difficulty", diffSpinner.getSelectedItem().toString());
+        queryValuesMap.put("frequency", freqSpinner.getSelectedItem().toString());
 
-    //Un-comment when queryValuesMap is complete
-        //dbTools.insertHabit(queryValuesMap);
+        dbTools.insertHabit(queryValuesMap);
 
         this.callMainActivity(view);
         this.finish();
     }
 
     public void callMainActivity(View view) {
-        //TODO: Should ContentMain be MainActivity ?
         Intent intent = new Intent(getApplication(), MainActivity.class);
         startActivity(intent);
     }

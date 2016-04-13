@@ -81,7 +81,7 @@
             <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:listSelector="#000000"
+                android:listSelector="#ffffff"
                 android:layout_column="2"
                 android:id="@android:id/list" />
         </TableRow>
