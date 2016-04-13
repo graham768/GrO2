@@ -29,15 +29,16 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //TODO: Attach fab to AddHabit
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AddHabit.class);
                 startActivity(intent);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+                //TODO: Replace finish() with something appropriate.
+                // This is probably incorrect and reloads the cache every time we recreate main.
+                finish();
             }
         });
 
