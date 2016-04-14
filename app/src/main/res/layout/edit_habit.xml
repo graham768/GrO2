@@ -99,6 +99,14 @@
             android:text="@string/delete"
             android:id="@+id/delete_button"
             android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="callMainActivity"
+            android:text="@string/cancel"
+            android:id="@+id/button"
+            android:layout_weight="1"/>
     </TableRow>
 
 

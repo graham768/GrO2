@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:onClick="addHabit"
             android:text="@string/save"
-            android:id="@+id/editButton"
+            android:id="@+id/add_button"
             android:layout_weight="1"/>
 
         <Button
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:onClick="callMainActivity"
             android:text="@string/cancel"
-            android:id="@+id/delete_button"
+            android:id="@+id/cancel_button"
             android:layout_weight="1"/>
     </TableRow>
 
