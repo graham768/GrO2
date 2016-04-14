@@ -23,9 +23,6 @@ public class EditHabit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_habit);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_habit);
-
         //Define elements
         title = (EditText) findViewById(R.id.titleEditText);
         diffSpinner = (Spinner) findViewById(R.id.diffSpinner);
@@ -34,6 +31,12 @@ public class EditHabit extends AppCompatActivity {
         freqSpinner = (Spinner) findViewById(R.id.freqSpinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
                 EditHabit.this, R.array.frequencyArray, android.R.layout.simple_spinner_dropdown_item);
+
+        //Spinner adapters
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        diffSpinner.setAdapter(adapter1);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        freqSpinner.setAdapter(adapter2);
 
         //Find the habit to edit
         Intent intent = getIntent();
@@ -53,7 +56,7 @@ public class EditHabit extends AppCompatActivity {
 
     }
 
-    public void editContact(View view) {
+    public void editHabit(View view) {
 
         HashMap<String, String> queryValueMap = new HashMap<>();
 
