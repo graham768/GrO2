@@ -49,7 +49,6 @@ public class AddHabit extends Activity {
         HashMap<String, String> queryValuesMap = new HashMap<>();
 
         queryValuesMap.put("title", title.getText().toString());
-        //TODO:Setup spinner methods to get spinner value
         queryValuesMap.put("difficulty", diffSpinner.getSelectedItem().toString());
         queryValuesMap.put("frequency", freqSpinner.getSelectedItem().toString());
 
