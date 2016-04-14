@@ -55,12 +55,13 @@ public class AddHabit extends Activity {
         dbTools.insertHabit(queryValuesMap);
 
         this.callMainActivity(view);
-        this.finish();
+
     }
 
     public void callMainActivity(View view) {
         Intent intent = new Intent(getApplication(), MainActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
 }

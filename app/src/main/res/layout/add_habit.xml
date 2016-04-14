@@ -96,7 +96,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="cancel"
+            android:onClick="callMainActivity"
             android:text="@string/cancel"
             android:id="@+id/delete_button"
             android:layout_weight="1"/>
