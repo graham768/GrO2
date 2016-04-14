@@ -7,20 +7,26 @@
     <string name="action_settings">Settings</string>
 
     <string name="add_habit">Add New Habit</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    S
+    <string name="delete">Delete</string>
     <string name="title">Title</string>
     <string name="difficulty">Difficulty</string>
     <string name="frequency">Frequency</string>
 
 
     <string name="habits">Habits</string>
+    <string name="greeting">Hello John Smith, lets look at your progress for today!</string>
 
-    <string-array name="difficultyArray" >
+    <string-array name="difficultyArray">
         <item name="easy">Easy</item>
         <item name="medium">Medium</item>
         <item name="hard">Hard</item>
     </string-array>
 
-    <string-array name="frequencyArray" >
+    <string-array name="frequencyArray">
         <item name="daily">Daily</item>
         <item name="weekly">Weekly</item>
         <item name="monthly">Monthly</item>

@@ -37,7 +37,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
         String query = "CREATE TABLE habits ( habitId INTEGER PRIMARY KEY, " +
                                               "title TEXT, " +
-                                              "difficulty INTEGER, " +
+                                              "difficulty TEXT, " +
                                               "frequency TEXT)";
 
         // Executes the query provided as long as the query isn't a select
@@ -120,7 +120,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
         habitArrayList = new ArrayList<HashMap<String, String>>();
 
-        String selectQuery = "SELECT  * FROM contacts";
+        String selectQuery = "SELECT  * FROM habits";
 
         // Open a database for reading and writing
 
@@ -137,18 +137,18 @@ public class DBTools  extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                HashMap<String, String> contactMap = new HashMap<String, String>();
+                HashMap<String, String> habitMap = new HashMap<String, String>();
 
                 // Store the key / value pairs in a HashMap
                 // Access the Cursor data by index that is in the same order
                 // as used when creating the table
 
-                contactMap.put("habitId", cursor.getString(0));
-                contactMap.put("title", cursor.getString(1));
-                contactMap.put("difficulty", cursor.getString(2));
-                contactMap.put("frequency", cursor.getString(3));
+                habitMap.put("habitId", cursor.getString(0));
+                habitMap.put("title", cursor.getString(1));
+                habitMap.put("difficulty", cursor.getString(2));
+                habitMap.put("frequency", cursor.getString(3));
 
-                habitArrayList.add(contactMap);
+                habitArrayList.add(habitMap);
             } while (cursor.moveToNext()); // Move Cursor to the next row
         }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal">
 
     <TableRow
         android:layout_width="match_parent"
@@ -35,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- TODO: BUG: Typing Causes the spinners to shift down the page-->
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,9 +87,17 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="addHabit"
-            android:text="@string/save"
-            android:id="@+id/add_button"
+            android:onClick="editHabit"
+            android:text="@string/edit"
+            android:id="@+id/editButton"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="removeHabit"
+            android:text="@string/delete"
+            android:id="@+id/delete_button"
             android:layout_weight="1"/>
 
         <Button
@@ -98,8 +105,9 @@
             android:layout_height="wrap_content"
             android:onClick="callMainActivity"
             android:text="@string/cancel"
-            android:id="@+id/cancel_button"
+            android:id="@+id/button"
             android:layout_weight="1"/>
     </TableRow>
+
 
 </TableLayout>
