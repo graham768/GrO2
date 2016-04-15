@@ -3,7 +3,6 @@ package fr3380ot.com.gro2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -62,14 +61,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
-
-
         //Pull habits from database and store in habitList
         ArrayList<HashMap<String, String>> habitList = dbTools.getAllHabits();
         dbTools.getAllHabits();
 
-        //If there are habits created
+        //If there are habits fill the habit listView
         if(habitList.size() != 0) {
             ListView listView = (ListView) findViewById(android.R.id.list);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
