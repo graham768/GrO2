@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@string/add_habit"
+            android:text="@string/edit_habit"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/addHabit"
             android:textColor="#FFFFFF"/>

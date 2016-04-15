@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_plus"
+        android:id="@+id/plus" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -12,8 +20,22 @@
         android:visibility="gone" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/plus"
+        android:text="difficulty"
+        android:id="@+id/difficulty" />
+
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/plus"
+        android:layout_above="@id/difficulty"
+        android:layout_alignWithParentIfMissing="true"
         android:text="Your new habits go here!"
         android:id="@+id/habitTitle"
         android:padding="5dp"
@@ -21,4 +43,6 @@
         android:textSize="20dp"
         android:textStyle="bold"/>
 
-</TableRow>
+
+
+</RelativeLayout>
