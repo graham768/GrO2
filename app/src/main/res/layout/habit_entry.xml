@@ -7,6 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxHeight="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_plus"
@@ -25,16 +26,16 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/plus"
-        android:text="difficulty"
-        android:id="@+id/difficulty" />
+        android:text="Difficulty"
+        android:id="@+id/habitDifficulty" />
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/plus"
-        android:layout_above="@id/difficulty"
+        android:layout_above="@id/habitDifficulty"
         android:layout_alignWithParentIfMissing="true"
         android:text="Your new habits go here!"
         android:id="@+id/habitTitle"
@@ -42,7 +43,5 @@
         android:textColor="#444444"
         android:textSize="20dp"
         android:textStyle="bold"/>
-
-
 
 </RelativeLayout>
