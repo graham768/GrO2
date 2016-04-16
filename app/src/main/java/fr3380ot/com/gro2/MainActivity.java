@@ -139,7 +139,8 @@ public class MainActivity extends AppCompatActivity
                 // Handle the camera action
                 break;
             case R.id.nav_environment:
-                setContentView(R.layout.environment);
+                intent = new Intent(getApplication(), Environment.class);
+                startActivity(intent);
                 break;
             case R.id.nav_rewards:
                 break;
