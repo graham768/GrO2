@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     DBTools dbTools = new DBTools(this);
     Intent intent;
     TextView habitId;
+    Boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,11 @@ public class MainActivity extends AppCompatActivity
                     R.id.habitId, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
 
             listView.setAdapter(adapter);
+
+            if(!flag) {
+                dbTools.insertUser("John Smith");
+                flag = true;
+            }
         }
     }
 
