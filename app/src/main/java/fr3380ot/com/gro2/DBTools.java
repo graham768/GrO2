@@ -35,15 +35,35 @@ public class DBTools  extends SQLiteOpenHelper {
         // Creates a table in SQLite
         // Make sure you don't put a ; at the end of the query
 
-        String query = "CREATE TABLE habits ( habitId INTEGER PRIMARY KEY, " +
+        String habits = "CREATE TABLE habits ( habitId INTEGER PRIMARY KEY, " +
                                               "title TEXT, " +
                                               "difficulty TEXT, " +
                                               "frequency TEXT)";
 
+        String plants = "CREATE TABLE plants ( plantId INTEGER PRIMARY KEY, " +
+                                                "title TEXT, " +
+                                                "description TEXT, " +
+                                                "price TEXT, " +
+                                                "oxygenRate TEXT, " +
+                                                "waterCost TEXT"  +
+                                                "pictureId TEXT)";
+
+        String environment = "CREATE TABLE environment ( tileId INTEGER PRIMARY KEY, " +
+                                                        "plantId TEXT" +
+                                                        "growthLevel TEXT)";
+
+        String user = "CREATE TABLE user ( userId INTEGER PRIMARY KEY, " +
+                                          "name TEXT, " +
+                                          "waterLevel TEXT, " +
+                                          "oxygenLevel TEXT)";
+
         // Executes the query provided as long as the query isn't a select
         // or if the query doesn't return any data
 
-        database.execSQL(query);
+        database.execSQL(habits);
+        database.execSQL(plants);
+        database.execSQL(environment);
+        database.execSQL(user);
 
     }
 
@@ -54,9 +74,15 @@ public class DBTools  extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int version_old, int current_version) {
-        String query = "DROP TABLE IF EXISTS habits";
+        String habits = "DROP TABLE IF EXISTS habits";
+        String plants = "DROP TABLE IF EXISTS plants";
+        String environment = "DROP TABLE IF EXISTS environment";
+        String user = "DROP TABLE IF EXISTS user";
 
-        database.execSQL(query);
+        database.execSQL(habits);
+        database.execSQL(plants);
+        database.execSQL(environment);
+        database.execSQL(user);
         onCreate(database);
     }
 
@@ -178,5 +204,170 @@ public class DBTools  extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return habitMap;
+    }
+
+    public void insertPlant(HashMap<String, String> queryValues) {
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // Stores key value pairs being the column name and the data
+        // ContentValues data type is needed because the database
+        // requires its data type to be passed
+
+        ContentValues values = new ContentValues();
+
+        values.put("title", queryValues.get("title"));
+        values.put("description", queryValues.get("description"));
+        values.put("price", queryValues.get("price"));
+        values.put("oxygenRate", queryValues.get("oxygenRate"));
+        values.put("waterCost", queryValues.get("waterCost"));
+        values.put("pictureId", queryValues.get("pictureId"));
+
+        database.insert("plants", null, values);
+
+        database.close();
+    }
+
+    public int updatePlant(HashMap<String, String> queryValues) {
+
+        // Open a database for reading and writing
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // Stores key value pairs being the column name and the data
+
+        ContentValues values = new ContentValues();
+
+        values.put("title", queryValues.get("title"));
+        values.put("description", queryValues.get("description"));
+        values.put("price", queryValues.get("price"));
+        values.put("oxygenRate", queryValues.get("oxygenRate"));
+        values.put("waterCost", queryValues.get("waterCost"));
+        values.put("pictureId", queryValues.get("pictureId"));
+
+        // update(TableName, ContentValueForTable, WhereClause, ArgumentForWhereClause)
+
+        return database.update("plants", values, "plantId" + " = ?", new String[] { queryValues.get("plantId") });
+    }
+
+    public void deletePlant(String id) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String deleteQuery = "DELETE FROM  plants where plantId='"+ id +"'";
+        database.execSQL(deleteQuery);
+    }
+
+    public ArrayList<HashMap<String, String>> getAllPlants() {
+
+        ArrayList<HashMap<String, String>> plantArrayList;
+        plantArrayList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "SELECT  * FROM plants";
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> plantMap = new HashMap<String, String>();
+
+                plantMap.put("plantId", cursor.getString(0));
+                plantMap.put("title", cursor.getString(1));
+                plantMap.put("description", cursor.getString(2));
+                plantMap.put("price", cursor.getString(3));
+                plantMap.put("oxygenRate", cursor.getString(4));
+                plantMap.put("waterCost", cursor.getString(5));
+                plantMap.put("pictureId", cursor.getString(6));
+
+                plantArrayList.add(plantMap);
+            } while (cursor.moveToNext()); // Move Cursor to the next row
+        }
+
+        return plantArrayList;
+    }
+
+    public HashMap<String, String> getPlantInfo(String id) {
+        HashMap<String, String> plantMap = new HashMap<String, String>();
+
+        // Open a database for reading only
+
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM plants where plantId='"+id+"'";
+
+        // rawQuery executes the query and returns the result as a Cursor
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                plantMap.put("plantId", cursor.getString(0));
+                plantMap.put("title", cursor.getString(1));
+                plantMap.put("description", cursor.getString(2));
+                plantMap.put("price", cursor.getString(3));
+                plantMap.put("oxygenRate", cursor.getString(4));
+                plantMap.put("waterCost", cursor.getString(5));
+                plantMap.put("pictureId", cursor.getString(6));
+
+            } while (cursor.moveToNext());
+        }
+        return plantMap;
+    }
+
+    public void insertUser(String name){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // Stores key value pairs being the column name and the data
+        // ContentValues data type is needed because the database
+        // requires its data type to be passed
+
+        ContentValues values = new ContentValues();
+
+        values.put("name", name);
+        values.put("waterLevel", 0);
+        values.put("oxygenLevel", 0);
+
+        database.insert("user", null, values);
+
+        database.close();
+    }
+
+    public HashMap<String, String> getUserInfo(){
+        HashMap<String, String> userMap = new HashMap<String, String>();
+
+        // Open a database for reading only
+
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM user WHERE userID = 1 LIMIT 1";
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+
+        userMap.put("userId", cursor.getString(0));
+        userMap.put("name", cursor.getString(1));
+        userMap.put("waterLevel", cursor.getString(2));
+        userMap.put("oxygenLevel", cursor.getString(3));
+
+        return userMap;
+    }
+
+    public int updateUser(HashMap<String, String> user){
+
+        // Open a database for reading and writing
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // Stores key value pairs being the column name and the data
+
+        ContentValues values = new ContentValues();
+
+        //values.put("userId", user.get("userId"));
+        values.put("name", user.get("name"));
+        values.put("waterLevel", user.get("waterLevel"));
+        values.put("oxygenLevel", user.get("oxygenLevel"));
+
+        // update(TableName, ContentValueForTable, WhereClause, ArgumentForWhereClause)
+
+        return database.update("user", values, "userId" + " = ?", new String[] {user.get("userId")});
+
     }
 }
