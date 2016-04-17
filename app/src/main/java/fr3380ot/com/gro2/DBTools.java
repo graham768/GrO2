@@ -14,6 +14,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBTools  extends SQLiteOpenHelper {
 
@@ -59,7 +60,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
         // Executes the query provided as long as the query isn't a select
         // or if the query doesn't return any data
-        String userInsert = "INSERT INTO user ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '0', '0')";
+        String userInsert = "INSERT INTO user ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '900', '900')";
         String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Sunflower', 'A cute sunflower', '25', '2','5','1')";
         String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Camellia', 'A lovely Camellia','50', '4','10','2')";
         String chrysanthemumInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Chrysanthemum', 'A beautiful Chrysanthemum','75', '8','15','3')";
@@ -320,6 +321,32 @@ public class DBTools  extends SQLiteOpenHelper {
         }
         return plantMap;
     }
+
+
+    public int insertEnvironment(HashMap<String, String> plant){
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        String checkEnvironNum = "SELECT Count(*) FROM environment";
+        Cursor cursor  = database.rawQuery(checkEnvironNum, null);
+        cursor.moveToFirst();
+        //Log.d("Number of plants", String.valueOf(cursor.getInt(0)));
+        if (cursor.getInt(0) >= 9) {
+            Log.d("Plants", "You have more than nine plants");
+            database.close();
+            return -1;
+        }
+
+        ContentValues values = new ContentValues();
+
+        values.put("plantId", plant.get("plantId"));
+        values.put("growthLevel", "1");
+
+        database.insert("environment", null, values);
+        database.close();
+
+        return 0;
+    }
+
 
 
     public HashMap<String, String> getUserInfo(){
