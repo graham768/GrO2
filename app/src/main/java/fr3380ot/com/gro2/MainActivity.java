@@ -143,6 +143,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             case R.id.nav_rewards:
+                intent = new Intent(getApplication(), Rewards.class);
+                startActivity(intent);
                 break;
             case R.id.nav_manage:
                 break;
