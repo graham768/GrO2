@@ -45,11 +45,11 @@ public class DBTools  extends SQLiteOpenHelper {
                                                 "description TEXT, " +
                                                 "price TEXT, " +
                                                 "oxygenRate TEXT, " +
-                                                "waterCost TEXT"  +
+                                                "waterCost TEXT,"  +
                                                 "pictureId TEXT)";
 
         String environment = "CREATE TABLE environment ( tileId INTEGER PRIMARY KEY, " +
-                                                        "plantId TEXT" +
+                                                        "plantId TEXT," +
                                                         "growthLevel TEXT)";
 
         String user = "CREATE TABLE user ( userId INTEGER PRIMARY KEY, " +
@@ -59,13 +59,13 @@ public class DBTools  extends SQLiteOpenHelper {
 
         // Executes the query provided as long as the query isn't a select
         // or if the query doesn't return any data
+        String userInsert = "INSERT INTO USER ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '0', '0')";
 
         database.execSQL(habits);
         database.execSQL(plants);
         database.execSQL(environment);
         database.execSQL(user);
-
-        insertUser("John Smith");
+        database.execSQL(userInsert);
 
     }
 
@@ -314,23 +314,6 @@ public class DBTools  extends SQLiteOpenHelper {
         return plantMap;
     }
 
-    public void insertUser(String name){
-        SQLiteDatabase database = this.getWritableDatabase();
-
-        // Stores key value pairs being the column name and the data
-        // ContentValues data type is needed because the database
-        // requires its data type to be passed
-
-        ContentValues values = new ContentValues();
-
-        values.put("name", name);
-        values.put("waterLevel", 0);
-        values.put("oxygenLevel", 0);
-
-        database.insert("user", null, values);
-
-        database.close();
-    }
 
     public HashMap<String, String> getUserInfo(){
         HashMap<String, String> userMap = new HashMap<String, String>();
