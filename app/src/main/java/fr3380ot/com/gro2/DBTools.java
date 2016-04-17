@@ -59,13 +59,20 @@ public class DBTools  extends SQLiteOpenHelper {
 
         // Executes the query provided as long as the query isn't a select
         // or if the query doesn't return any data
-        String userInsert = "INSERT INTO USER ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '0', '0')";
+        String userInsert = "INSERT INTO user ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '0', '0')";
+        String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Sunflower', 'A cute sunflower', '25', '2','5','1')";
+        String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Camellia', 'A lovely Camellia','50', '4','10','2')";
+        String chrysanthemumInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Chrysanthemum', 'A beautiful Chrysanthemum','75', '8','15','3')";
+
 
         database.execSQL(habits);
         database.execSQL(plants);
         database.execSQL(environment);
         database.execSQL(user);
         database.execSQL(userInsert);
+        database.execSQL(sunflowerInsert);
+        database.execSQL(camelliaInsert);
+        database.execSQL(chrysanthemumInsert);
 
     }
 
