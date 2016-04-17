@@ -45,11 +45,11 @@ public class DBTools  extends SQLiteOpenHelper {
                                                 "description TEXT, " +
                                                 "price TEXT, " +
                                                 "oxygenRate TEXT, " +
-                                                "waterCost TEXT"  +
+                                                "waterCost TEXT,"  +
                                                 "pictureId TEXT)";
 
         String environment = "CREATE TABLE environment ( tileId INTEGER PRIMARY KEY, " +
-                                                        "plantId TEXT" +
+                                                        "plantId TEXT," +
                                                         "growthLevel TEXT)";
 
         String user = "CREATE TABLE user ( userId INTEGER PRIMARY KEY, " +
@@ -65,7 +65,6 @@ public class DBTools  extends SQLiteOpenHelper {
         database.execSQL(environment);
         database.execSQL(user);
 
-        insertUser("John Smith");
 
     }
 
@@ -324,8 +323,8 @@ public class DBTools  extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put("name", name);
-        values.put("waterLevel", 0);
-        values.put("oxygenLevel", 0);
+        values.put("waterLevel", "0");
+        values.put("oxygenLevel", "0");
 
         database.insert("user", null, values);
 
