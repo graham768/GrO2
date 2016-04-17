@@ -331,7 +331,7 @@ public class DBTools  extends SQLiteOpenHelper {
         cursor.moveToFirst();
         //Log.d("Number of plants", String.valueOf(cursor.getInt(0)));
         if (cursor.getInt(0) >= 9) {
-            Log.d("Plants", "You have more than nine plants");
+            Log.d("Plants", "You can't have more than nine plants");
             database.close();
             return -1;
         }
