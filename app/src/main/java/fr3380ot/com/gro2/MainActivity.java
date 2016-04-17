@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity
             });
 
             ListAdapter adapter = new CustomListAdapter(
-                    this, habitList, R.layout.habit_entry, new String[]{"habitId", "title", "difficulty"}, new int[]{
-                    R.id.habitId, R.id.habitTitle, R.id.habitDifficulty});
+                    this, habitList, R.layout.habit_entry, new String[]{"habitId", "title", "difficulty", "frequency"}, new int[]{
+                    R.id.habitId, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
 
             listView.setAdapter(adapter);
         }

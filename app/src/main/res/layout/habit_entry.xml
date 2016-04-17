@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="difficulty"
-        android:id="@+id/difficulty"
+        android:id="@+id/habitDifficulty"
         android:gravity="right"
         android:paddingLeft="15dp"
         android:layout_alignParentBottom="true"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/plus"
-        android:layout_above="@id/difficulty"
+        android:layout_above="@id/habitDifficulty"
         android:layout_alignWithParentIfMissing="true"
         android:text="Your new habits go here!"
         android:id="@+id/habitTitle"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="frequency"
-        android:id="@+id/frequency"
+        android:id="@+id/habitFrequency"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
