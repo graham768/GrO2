@@ -65,6 +65,8 @@ public class DBTools  extends SQLiteOpenHelper {
         database.execSQL(environment);
         database.execSQL(user);
 
+        insertUser("John Smith");
+
     }
 
     // onUpgrade is used to drop tables, add tables, or do anything
