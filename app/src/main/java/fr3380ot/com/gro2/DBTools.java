@@ -45,6 +45,7 @@ public class DBTools  extends SQLiteOpenHelper {
                                                 "description TEXT, " +
                                                 "price TEXT, " +
                                                 "oxygenRate TEXT, " +
+                                                "waterCost TEXT"  +
                                                 "pictureId TEXT)";
 
         String environment = "CREATE TABLE environment ( tileId INTEGER PRIMARY KEY, " +
@@ -219,6 +220,7 @@ public class DBTools  extends SQLiteOpenHelper {
         values.put("description", queryValues.get("description"));
         values.put("price", queryValues.get("price"));
         values.put("oxygenRate", queryValues.get("oxygenRate"));
+        values.put("waterCost", queryValues.get("waterCost"));
         values.put("pictureId", queryValues.get("pictureId"));
 
         database.insert("plants", null, values);
@@ -240,6 +242,7 @@ public class DBTools  extends SQLiteOpenHelper {
         values.put("description", queryValues.get("description"));
         values.put("price", queryValues.get("price"));
         values.put("oxygenRate", queryValues.get("oxygenRate"));
+        values.put("waterCost", queryValues.get("waterCost"));
         values.put("pictureId", queryValues.get("pictureId"));
 
         // update(TableName, ContentValueForTable, WhereClause, ArgumentForWhereClause)
@@ -271,7 +274,8 @@ public class DBTools  extends SQLiteOpenHelper {
                 plantMap.put("description", cursor.getString(2));
                 plantMap.put("price", cursor.getString(3));
                 plantMap.put("oxygenRate", cursor.getString(4));
-                plantMap.put("pictureId", cursor.getString(5));
+                plantMap.put("waterCost", cursor.getString(5));
+                plantMap.put("pictureId", cursor.getString(6));
 
                 plantArrayList.add(plantMap);
             } while (cursor.moveToNext()); // Move Cursor to the next row
@@ -300,7 +304,8 @@ public class DBTools  extends SQLiteOpenHelper {
                 plantMap.put("description", cursor.getString(2));
                 plantMap.put("price", cursor.getString(3));
                 plantMap.put("oxygenRate", cursor.getString(4));
-                plantMap.put("pictureId", cursor.getString(5));
+                plantMap.put("waterCost", cursor.getString(5));
+                plantMap.put("pictureId", cursor.getString(6));
 
             } while (cursor.moveToNext());
         }
