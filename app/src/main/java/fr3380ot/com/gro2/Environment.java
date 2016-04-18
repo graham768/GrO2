@@ -3,8 +3,15 @@ package fr3380ot.com.gro2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -15,7 +22,7 @@ import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Environment extends AppCompatActivity {
+public class Environment extends MainActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView env00, env01, env02, env10, env11, env12, env20, env21, env22;
     DBTools dbTools = new DBTools(this);
@@ -28,6 +35,18 @@ public class Environment extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.environment);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //Define elements
 
