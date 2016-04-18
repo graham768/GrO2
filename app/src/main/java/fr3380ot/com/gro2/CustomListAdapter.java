@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
     Context context;
     Intent intent;
     TextView habitId;
+    TableRow tableRow;
 
     public CustomListAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
@@ -35,7 +37,7 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
         v.findViewById(R.id.tableRow)
                 .setOnClickListener(this);
 
-        v.findViewById(R.id.plus)
+        v.findViewById(R.id.tableRowPlus)
                 .setOnClickListener(this);
 
         return v;
@@ -43,10 +45,12 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        String habitIdValue;
         switch (v.getId()) {
             case R.id.tableRow:
-                habitId = (TextView) v.findViewById(R.id.habitId);
-                String habitIdValue = habitId.getText().toString();
+                habitId = (TextView) v.findViewById(R.id.habitId2);
+                habitIdValue = habitId.getText().toString();
+                Log.d("editHabit", habitIdValue);
 
                 intent = new Intent(context.getApplicationContext(), EditHabit.class);
 
@@ -54,8 +58,13 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
 
                 context.startActivity(intent);
                 break;
-            case R.id.plus:
-                Log.d("Test", "plus clicked");
+            case R.id.tableRowPlus:
+                habitId = (TextView) v.findViewById(R.id.habitId1);
+                habitIdValue = habitId.getText().toString();
+                Log.d("onClick", habitIdValue);
+                if(context instanceof MainActivity){
+                    ((MainActivity)context).habitCheckIn(habitIdValue);
+                }
             default:
                 break;
         }
