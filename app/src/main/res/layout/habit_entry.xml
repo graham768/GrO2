@@ -18,51 +18,54 @@
         android:paddingLeft="20dp"
         android:background="#9bfcff" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/habitId"
-        android:visibility="gone" />
-
-    <TextView
+    <TableRow
+        android:id="@+id/tableRow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="difficulty"
-        android:id="@+id/habitDifficulty"
-        android:gravity="right"
-        android:paddingLeft="15dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/habitTitle"
-        android:layout_alignEnd="@+id/habitTitle"
-        android:layout_marginRight="30dp"
-        android:layout_marginEnd="30dp" />
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/plus">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/plus"
-        android:layout_above="@id/habitDifficulty"
-        android:layout_alignWithParentIfMissing="true"
-        android:text="Your new habits go here!"
-        android:id="@+id/habitTitle"
-        android:padding="5dp"
-        android:textColor="#444444"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_alignParentStart="false"
-        android:gravity="right"
-        android:allowUndo="true" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/habitId"
+            android:visibility="gone" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="frequency"
-        android:id="@+id/habitFrequency"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="difficulty"
+            android:id="@+id/habitDifficulty"
+            android:gravity="right"
+            android:paddingLeft="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/habitTitle"
+            android:layout_alignEnd="@+id/habitTitle"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Your new habits go here!"
+            android:id="@+id/habitTitle"
+            android:padding="5dp"
+            android:textColor="#444444"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:allowUndo="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="frequency"
+            android:id="@+id/habitFrequency"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </TableRow>
 
 
 </RelativeLayout>
