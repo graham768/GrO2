@@ -3,6 +3,7 @@ package fr3380ot.com.gro2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -68,30 +69,42 @@ public class MainActivity extends AppCompatActivity
         //If there are habits fill the habit listView
         if(habitList.size() != 0) {
             ListView listView = (ListView) findViewById(android.R.id.list);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                // When an item is clicked, get the TextView with the matching Id
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //the item clicked
-                    habitId = (TextView) view.findViewById(R.id.habitId);
-                    String habitIdValue = habitId.getText().toString();
-
-                    intent = new Intent(getApplication(), EditHabit.class);
-
-                    intent.putExtra("habitId", habitIdValue);
-
-                    startActivity(intent);
-                }
-            });
-
-            ListAdapter adapter = new CustomListAdapter(
-                    this, habitList, R.layout.habit_entry, new String[]{"habitId", "title", "difficulty", "frequency"}, new int[]{
-                    R.id.habitId, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
+            CustomListAdapter adapter = new CustomListAdapter(
+                    this, habitList, R.layout.habit_entry, new String[]{"habitId", "habitId", "title", "difficulty", "frequency"}, new int[]{
+                    R.id.habitId1, R.id.habitId2, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
 
             listView.setAdapter(adapter);
-
         }
+    }
+
+    public void habitCheckIn(String habitId) {
+
+        HashMap<String, String> user = dbTools.getUserInfo();
+        HashMap<String, String> habit = dbTools.getHabitInfo(habitId);
+        String diff = habit.get("difficulty");
+
+        Log.d("habitCheckIn", habitId);
+
+        if(diff.equals("Easy")) {
+            int waterInt = Integer.parseInt(user.get("waterLevel"));
+            String water = waterInt + 1 + "";
+            user.put("waterLevel", water);
+            Log.d("Easy", water);
+        }
+        else if (diff.equals("Medium")) {
+            int waterInt = Integer.parseInt(user.get("waterLevel"));
+            String water = waterInt + 4 + "";
+            user.put("waterLevel", water);
+            Log.d("Medium", water);
+        }
+        else {
+            int waterInt = Integer.parseInt(user.get("waterLevel"));
+            String water = waterInt + 10 + "";
+            user.put("waterLevel", water);
+            Log.d("Hard", water);
+        }
+        dbTools.updateUser(user);
     }
 
     @Override
