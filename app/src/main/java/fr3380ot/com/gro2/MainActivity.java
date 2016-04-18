@@ -89,58 +89,67 @@ public class MainActivity extends AppCompatActivity
         progressBar2.setProgress(progress2);
     }
 
-    public void habitCheckIn(String habitId) {
+    public boolean habitCheckIn(String habitId) {
 
         HashMap<String, String> user = dbTools.getUserInfo();
         HashMap<String, String> habit = dbTools.getHabitInfo(habitId);
-        String diff = habit.get("difficulty");
-        int waterInt = 0;
-        String water = "";
-        Log.d("habitCheckIn", habitId);
+        if (habit.get("available").equals("1")){
+            String diff = habit.get("difficulty");
+            int waterInt = 0;
+            String water = "";
+            Log.d("habitCheckIn", habitId);
 
 
-        switch (diff) {
-            case "Easy":
-                waterInt = Integer.parseInt(user.get("waterLevel"));
-                if (waterInt + 1 > 100){
-                    waterInt = 100;
-                    water = waterInt + "";
-                }else{
-                    water = waterInt + 1 + "";
-                }
-                progressBar1.setProgress(progressBar1.getProgress() + 1);
-                Log.d("Easy", water);
-                break;
-            case "Medium":
-                waterInt = Integer.parseInt(user.get("waterLevel"));
-                if (waterInt + 4 > 100){
-                    waterInt = 100;
-                    water = waterInt + "";
-                }else{
-                    water = waterInt + 4 + "";
-                }
-                progressBar1.setProgress(progressBar1.getProgress() + 4);
-                Log.d("Medium", water);
-                break;
-            case "Hard":
-                waterInt = Integer.parseInt(user.get("waterLevel"));
-                if (waterInt + 10 > 100){
-                    waterInt = 100;
-                    water = waterInt + "";
-                }else{
-                    water = waterInt + 10 + "";
-                }
-                progressBar1.setProgress(progressBar1.getProgress() + 10);
-                Log.d("Hard", water);
-                break;
-            default:
-                Log.d("Habit Check In", "Broken");
+            switch (diff) {
+                case "Easy":
+                    waterInt = Integer.parseInt(user.get("waterLevel"));
+                    if (waterInt + 1 > 100){
+                        waterInt = 100;
+                        water = waterInt + "";
+                    }else{
+                        water = waterInt + 1 + "";
+                    }
+                    progressBar1.setProgress(progressBar1.getProgress() + 1);
+                    Log.d("Easy", water);
+                    break;
+                case "Medium":
+                    waterInt = Integer.parseInt(user.get("waterLevel"));
+                    if (waterInt + 4 > 100){
+                        waterInt = 100;
+                        water = waterInt + "";
+                    }else{
+                        water = waterInt + 4 + "";
+                    }
+                    progressBar1.setProgress(progressBar1.getProgress() + 4);
+                    Log.d("Medium", water);
+                    break;
+                case "Hard":
+                    waterInt = Integer.parseInt(user.get("waterLevel"));
+                    if (waterInt + 10 > 100){
+                        waterInt = 100;
+                        water = waterInt + "";
+                    }else{
+                        water = waterInt + 10 + "";
+                    }
+                    progressBar1.setProgress(progressBar1.getProgress() + 10);
+                    Log.d("Hard", water);
+                    break;
+                default:
+                    Log.d("Habit Check In", "Broken");
+            }
+            user.put("waterLevel", water);
+            if (progressBar1.getProgress() > 100){
+                progressBar1.setProgress(100);
+            }
+
+            habit.put("available", "0");
+            dbTools.updateHabit(habit);
+            dbTools.updateUser(user);
+            return true;
+        }else{
+            return false;
         }
-        user.put("waterLevel", water);
-        if (progressBar1.getProgress() > 100){
-            progressBar1.setProgress(100);
-        }
-        dbTools.updateUser(user);
+
     }
 
     @Override

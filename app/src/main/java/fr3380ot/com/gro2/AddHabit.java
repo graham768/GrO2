@@ -50,6 +50,7 @@ public class AddHabit extends Activity {
         queryValuesMap.put("title", title.getText().toString());
         queryValuesMap.put("difficulty", diffSpinner.getSelectedItem().toString());
         queryValuesMap.put("frequency", freqSpinner.getSelectedItem().toString());
+        queryValuesMap.put("available", "1");
 
         dbTools.insertHabit(queryValuesMap);
 

@@ -72,6 +72,7 @@ public class EditHabit extends AppCompatActivity {
         queryValueMap.put("title", title.getText().toString());
         queryValueMap.put("difficulty", diffSpinner.getSelectedItem().toString());
         queryValueMap.put("frequency", freqSpinner.getSelectedItem().toString());
+        queryValueMap.put("available", "1");
 
         dbTools.updateHabit(queryValueMap);
 

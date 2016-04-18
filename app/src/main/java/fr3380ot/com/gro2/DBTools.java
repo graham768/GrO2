@@ -39,7 +39,8 @@ public class DBTools  extends SQLiteOpenHelper {
         String habits = "CREATE TABLE habits ( habitId INTEGER PRIMARY KEY, " +
                                               "title TEXT, " +
                                               "difficulty TEXT, " +
-                                              "frequency TEXT)";
+                                              "frequency TEXT," +
+                                              "available TEXT)";
 
         String plants = "CREATE TABLE plants ( plantId INTEGER PRIMARY KEY, " +
                                                 "title TEXT, " +
@@ -110,6 +111,7 @@ public class DBTools  extends SQLiteOpenHelper {
         values.put("title", queryValues.get("title"));
         values.put("difficulty", queryValues.get("difficulty"));
         values.put("frequency", queryValues.get("frequency"));
+        values.put("available", queryValues.get("available"));
 
         database.insert("habits", null, values);
 
@@ -132,6 +134,7 @@ public class DBTools  extends SQLiteOpenHelper {
         values.put("title", queryValues.get("title"));
         values.put("difficulty", queryValues.get("difficulty"));
         values.put("frequency", queryValues.get("frequency"));
+        values.put("available", queryValues.get("available"));
 
         // update(TableName, ContentValueForTable, WhereClause, ArgumentForWhereClause)
 
@@ -184,6 +187,7 @@ public class DBTools  extends SQLiteOpenHelper {
                 habitMap.put("title", cursor.getString(1));
                 habitMap.put("difficulty", cursor.getString(2));
                 habitMap.put("frequency", cursor.getString(3));
+                habitMap.put("available", cursor.getString(4));
 
                 habitArrayList.add(habitMap);
             } while (cursor.moveToNext()); // Move Cursor to the next row
@@ -211,6 +215,7 @@ public class DBTools  extends SQLiteOpenHelper {
                 habitMap.put("title", cursor.getString(1));
                 habitMap.put("difficulty", cursor.getString(2));
                 habitMap.put("frequency", cursor.getString(3));
+                habitMap.put("available", cursor.getString(4));
 
             } while (cursor.moveToNext());
         }

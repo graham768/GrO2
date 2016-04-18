@@ -2,6 +2,7 @@ package fr3380ot.com.gro2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Ben on 4/17/16.
@@ -57,16 +61,43 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
                 intent.putExtra("habitId", habitIdValue);
 
                 context.startActivity(intent);
+
                 break;
             case R.id.tableRowPlus:
+                Timer timer = new Timer();
+                DailyTimer dailyTimer = new DailyTimer(v.findViewById(R.id.habitId1));
                 habitId = (TextView) v.findViewById(R.id.habitId1);
                 habitIdValue = habitId.getText().toString();
                 Log.d("onClick", habitIdValue);
-                if(context instanceof MainActivity){
-                    ((MainActivity)context).habitCheckIn(habitIdValue);
+                if(context instanceof MainActivity) {
+                    boolean result = ((MainActivity) context).habitCheckIn(habitIdValue);
+                    if (result){
+                        v.findViewById(R.id.plus).setBackgroundColor(Color.parseColor("#D3D3D3"));
+                        timer.schedule(dailyTimer,5000);
+                    }
                 }
             default:
                 break;
+        }
+    }
+
+    class DailyTimer extends TimerTask {
+
+        DBTools dbTools = new DBTools((MainActivity) context);
+        HashMap<String,String> habit;
+        View vPlus;
+        TextView habitId;
+        String habitIdValue;
+
+        public DailyTimer(View id){
+            habitId = (TextView) id.findViewById(R.id.habitId1);
+            habitIdValue = habitId.getText().toString();
+            habit = dbTools.getHabitInfo(habitIdValue);
+        }
+
+        public void run(){
+            habit.put("available", "1");
+            dbTools.updateHabit(habit);
         }
     }
 
