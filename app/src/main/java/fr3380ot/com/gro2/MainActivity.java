@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DBTools dbTools = new DBTools(this);
+    private ProgressBar progressBar1;
+    private ProgressBar progressBar2;
     Intent intent;
     TextView habitId;
 
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
         setSupportActionBar(toolbar);
 
 
@@ -76,6 +81,12 @@ public class MainActivity extends AppCompatActivity
 
             listView.setAdapter(adapter);
         }
+
+        HashMap<String, String> user = dbTools.getUserInfo();
+        int progress1 = Integer.parseInt(user.get("waterLevel"));
+        int progress2 = Integer.parseInt(user.get("oxygenLevel"));
+        progressBar1.setProgress(progress1);
+        progressBar2.setProgress(progress2);
     }
 
     public void habitCheckIn(String habitId) {
@@ -83,26 +94,51 @@ public class MainActivity extends AppCompatActivity
         HashMap<String, String> user = dbTools.getUserInfo();
         HashMap<String, String> habit = dbTools.getHabitInfo(habitId);
         String diff = habit.get("difficulty");
-
+        int waterInt = 0;
+        String water = "";
         Log.d("habitCheckIn", habitId);
 
-        if(diff.equals("Easy")) {
-            int waterInt = Integer.parseInt(user.get("waterLevel"));
-            String water = waterInt + 1 + "";
-            user.put("waterLevel", water);
-            Log.d("Easy", water);
+
+        switch (diff) {
+            case "Easy":
+                waterInt = Integer.parseInt(user.get("waterLevel"));
+                if (waterInt + 1 > 100){
+                    waterInt = 100;
+                    water = waterInt + "";
+                }else{
+                    water = waterInt + 1 + "";
+                }
+                progressBar1.setProgress(progressBar1.getProgress() + 1);
+                Log.d("Easy", water);
+                break;
+            case "Medium":
+                waterInt = Integer.parseInt(user.get("waterLevel"));
+                if (waterInt + 4 > 100){
+                    waterInt = 100;
+                    water = waterInt + "";
+                }else{
+                    water = waterInt + 4 + "";
+                }
+                progressBar1.setProgress(progressBar1.getProgress() + 4);
+                Log.d("Medium", water);
+                break;
+            case "Hard":
+                waterInt = Integer.parseInt(user.get("waterLevel"));
+                if (waterInt + 10 > 100){
+                    waterInt = 100;
+                    water = waterInt + "";
+                }else{
+                    water = waterInt + 10 + "";
+                }
+                progressBar1.setProgress(progressBar1.getProgress() + 10);
+                Log.d("Hard", water);
+                break;
+            default:
+                Log.d("Habit Check In", "Broken");
         }
-        else if (diff.equals("Medium")) {
-            int waterInt = Integer.parseInt(user.get("waterLevel"));
-            String water = waterInt + 4 + "";
-            user.put("waterLevel", water);
-            Log.d("Medium", water);
-        }
-        else {
-            int waterInt = Integer.parseInt(user.get("waterLevel"));
-            String water = waterInt + 10 + "";
-            user.put("waterLevel", water);
-            Log.d("Hard", water);
+        user.put("waterLevel", water);
+        if (progressBar1.getProgress() > 100){
+            progressBar1.setProgress(100);
         }
         dbTools.updateUser(user);
     }
@@ -115,6 +151,17 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+
+    public void onResume(){
+        HashMap<String, String> user = dbTools.getUserInfo();
+        int progress1 = Integer.parseInt(user.get("waterLevel"));
+        int progress2 = Integer.parseInt(user.get("oxygenLevel"));
+        progressBar1.setProgress(progress1);
+        progressBar2.setProgress(progress2);
+        Log.d("Resume", "Updated Main Activity");
+        super.onResume();
     }
 
     @Override
