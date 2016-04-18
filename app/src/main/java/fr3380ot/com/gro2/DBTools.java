@@ -49,9 +49,10 @@ public class DBTools  extends SQLiteOpenHelper {
                                                 "waterCost TEXT,"  +
                                                 "pictureId TEXT)";
 
-        String environment = "CREATE TABLE environment ( tileId INTEGER PRIMARY KEY, " +
+        String tile = "CREATE TABLE tile ( tileId INTEGER PRIMARY KEY, " +
                                                         "plantId TEXT," +
-                                                        "growthLevel TEXT)";
+                                                        "growthLevel TEXT" +
+                                                        ")";
 
         String user = "CREATE TABLE user ( userId INTEGER PRIMARY KEY, " +
                                           "name TEXT, " +
@@ -60,15 +61,15 @@ public class DBTools  extends SQLiteOpenHelper {
 
         // Executes the query provided as long as the query isn't a select
         // or if the query doesn't return any data
-        String userInsert = "INSERT INTO user ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '900', '900')";
-        String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Sunflower', 'A cute sunflower', '25', '2','5','1')";
-        String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Camellia', 'A lovely Camellia','50', '4','10','2')";
-        String chrysanthemumInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Chrysanthemum', 'A beautiful Chrysanthemum','75', '8','15','3')";
+        String userInsert = "INSERT INTO user ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '0', '100')";
+        String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Sunflower', 'A cute sunflower', '25', '2','3','1')";
+        String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Camellia', 'A lovely Camellia','50', '4','7','2')";
+        String chrysanthemumInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Chrysanthemum', 'A beautiful Chrysanthemum','75', '8','10','3')";
 
 
         database.execSQL(habits);
         database.execSQL(plants);
-        database.execSQL(environment);
+        database.execSQL(tile);
         database.execSQL(user);
         database.execSQL(userInsert);
         database.execSQL(sunflowerInsert);
@@ -86,12 +87,12 @@ public class DBTools  extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, int version_old, int current_version) {
         String habits = "DROP TABLE IF EXISTS habits";
         String plants = "DROP TABLE IF EXISTS plants";
-        String environment = "DROP TABLE IF EXISTS environment";
+        String tile = "DROP TABLE IF EXISTS tile";
         String user = "DROP TABLE IF EXISTS user";
 
         database.execSQL(habits);
         database.execSQL(plants);
-        database.execSQL(environment);
+        database.execSQL(tile);
         database.execSQL(user);
         onCreate(database);
     }
@@ -323,10 +324,10 @@ public class DBTools  extends SQLiteOpenHelper {
     }
 
 
-    public int insertEnvironment(HashMap<String, String> plant){
+    public int insertTile(HashMap<String, String> plant){
 
         SQLiteDatabase database = this.getWritableDatabase();
-        String checkEnvironNum = "SELECT Count(*) FROM environment";
+        String checkEnvironNum = "SELECT Count(*) FROM tile";
         Cursor cursor  = database.rawQuery(checkEnvironNum, null);
         cursor.moveToFirst();
         //Log.d("Number of plants", String.valueOf(cursor.getInt(0)));
@@ -341,10 +342,29 @@ public class DBTools  extends SQLiteOpenHelper {
         values.put("plantId", plant.get("plantId"));
         values.put("growthLevel", "1");
 
-        database.insert("environment", null, values);
+        database.insert("tile", null, values);
         database.close();
 
         return 0;
+    }
+
+    public HashMap<String, String> getTile(String id){
+        HashMap<String, String> tileMap = new HashMap<String, String>();
+
+        // Open a database for reading only
+
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM tile where tileId='"+id+"'";
+
+        // rawQuery executes the query and returns the result as a Cursor
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        tileMap.put("tileId",cursor.getString(0));
+        tileMap.put("plantId", cursor.getString(1));
+        tileMap.put("growthLevel", cursor.getString(2));
+        return tileMap;
     }
 
 

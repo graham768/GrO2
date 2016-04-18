@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class Rewards extends AppCompatActivity{
         if (oxygen >=  25){
             oxygen-=25;
             HashMap<String, String> plant = dbTools.getPlantInfo("1");
-            result = dbTools.insertEnvironment(plant);
+            result = dbTools.insertTile(plant);
             user.put("oxygenLevel", Integer.toString(oxygen));
             dbTools.updateUser(user);
         }
@@ -59,7 +60,7 @@ public class Rewards extends AppCompatActivity{
         if (oxygen >=  50){
             oxygen-=50;
             HashMap<String, String> plant = dbTools.getPlantInfo("2");
-            result = dbTools.insertEnvironment(plant);
+            result = dbTools.insertTile(plant);
             user.put("oxygenLevel", Integer.toString(oxygen));
             dbTools.updateUser(user);
         }
@@ -84,7 +85,7 @@ public class Rewards extends AppCompatActivity{
         if (oxygen >=  75){
             oxygen-=75;
             HashMap<String, String> plant = dbTools.getPlantInfo("3");
-            result = dbTools.insertEnvironment(plant);
+            result = dbTools.insertTile(plant);
             user.put("oxygenLevel", Integer.toString(oxygen));
             dbTools.updateUser(user);
         }
