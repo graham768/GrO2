@@ -33,22 +33,22 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = super.getView(position, convertView, parent);
 
-        //Check if list adapter for MainActivity.java
-        if(v.getContext() instanceof MainActivity) {
-            Log.d("Context is instanceof", "MainActivity");
-            v.findViewById(R.id.tableRow)
-                    .setOnClickListener(this);
-
-            v.findViewById(R.id.tableRowPlus)
-                    .setOnClickListener(this);
-        }
-
         //Check if list adapter for Rewards.java
         if(v.getContext() instanceof Rewards) {
             Log.d("Context is instanceof", "Rewards");
             v.findViewById(R.id.tableRowReward)
                     .setOnClickListener(this);
             v.findViewById(R.id.tableRowPurchase)
+                    .setOnClickListener(this);
+        }
+
+        //Check if list adapter for MainActivity.java
+        else if(v.getContext() instanceof MainActivity) {
+            Log.d("Context is instanceof", "MainActivity");
+            v.findViewById(R.id.tableRow)
+                    .setOnClickListener(this);
+
+            v.findViewById(R.id.tableRowPlus)
                     .setOnClickListener(this);
         }
 

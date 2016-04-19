@@ -198,14 +198,17 @@ public class MainActivity extends AppCompatActivity
                 // Handle the camera action
                 intent = new Intent(getApplication(), MainActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_environment:
                 intent = new Intent(getApplication(), Environment.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_rewards:
                 intent = new Intent(getApplication(), Rewards.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_manage:
                 break;
