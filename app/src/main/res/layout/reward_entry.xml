@@ -13,9 +13,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/rewardId"
+            android:id="@+id/plantId1"
             android:visibility="gone" />
 
+        <!-- TODO: Set to a null (non-displaying) value and populate with pictureId in Rewards-->
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
 
     </TableRow>
 
+    <!-- TODO: Only the border surrounding button is clickable-->
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,12 +46,18 @@
         android:layout_toRightOf="@id/tableRowReward"
         android:id="@+id/tableRowPurchase">
 
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/plantId2"
+            android:visibility="gone" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Price"
-            android:id="@+id/purchaseButton"
-            android:onClick="purchaseSunflower"
+            android:id="@+id/price"
             android:background="#f4d009" />
     </TableRow>
 

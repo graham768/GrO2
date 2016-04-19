@@ -41,6 +41,14 @@ public class DBTools  extends SQLiteOpenHelper {
                                               "difficulty TEXT, " +
                                               "frequency TEXT)";
 
+        //In order for CustomListAdapter to work in Rewards.java (See onCreate)
+        //rewardsId must be named plantId to pull the same column mapping
+        //when combining HashMaps from both tables into one ArrayList
+        //TODO: If customListAdapter returns null error for ImageView or picId, add picId here
+        String rewards = "CREATE TABLE rewards ( plantId INTEGER PRIMARY KEY, " +
+                                                "title TEXT, " +
+                                                "price TEXT)";
+
         String plants = "CREATE TABLE plants ( plantId INTEGER PRIMARY KEY, " +
                                                 "title TEXT, " +
                                                 "description TEXT, " +
@@ -61,6 +69,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
         // Executes the query provided as long as the query isn't a select
         // or if the query doesn't return any data
+        // Hard code these initially into the DB so they exist on installation
         String userInsert = "INSERT INTO user ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '0', '100')";
         String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Sunflower', 'A cute sunflower', '25', '2','3','1')";
         String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Camellia', 'A lovely Camellia','50', '4','7','2')";
@@ -68,6 +77,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
 
         database.execSQL(habits);
+        database.execSQL(rewards);
         database.execSQL(plants);
         database.execSQL(tile);
         database.execSQL(user);
@@ -86,16 +96,19 @@ public class DBTools  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, int version_old, int current_version) {
         String habits = "DROP TABLE IF EXISTS habits";
+        String rewards = "DROP TABLE IF EXISTS rewards";
         String plants = "DROP TABLE IF EXISTS plants";
         String tile = "DROP TABLE IF EXISTS tile";
         String user = "DROP TABLE IF EXISTS user";
 
         database.execSQL(habits);
+        database.execSQL(rewards);
         database.execSQL(plants);
         database.execSQL(tile);
         database.execSQL(user);
         onCreate(database);
     }
+
 
     public void insertHabit(HashMap<String, String> queryValues) {
 
@@ -116,9 +129,9 @@ public class DBTools  extends SQLiteOpenHelper {
         database.close();
     }
 
+
     // queryValues is a HashMap reference to the given habit
     // can be found with getHabitInfo()
-
     public int updateHabit(HashMap<String, String> queryValues) {
 
         // Open a database for reading and writing
@@ -138,8 +151,8 @@ public class DBTools  extends SQLiteOpenHelper {
         return database.update("habits", values, "habitId" + " = ?", new String[] { queryValues.get("habitId") });
     }
 
-    // Used to delete a habit with the matching habitId
 
+    // Used to delete a habit with the matching habitId
     public void deleteHabit(String id) {
 
         SQLiteDatabase database = this.getWritableDatabase();
@@ -147,6 +160,7 @@ public class DBTools  extends SQLiteOpenHelper {
         database.execSQL(deleteQuery);
 
     }
+
 
     public ArrayList<HashMap<String, String>> getAllHabits() {
 
@@ -192,6 +206,7 @@ public class DBTools  extends SQLiteOpenHelper {
         return habitArrayList;
     }
 
+
     public HashMap<String, String> getHabitInfo(String id) {
         HashMap<String, String> habitMap = new HashMap<String, String>();
 
@@ -217,55 +232,31 @@ public class DBTools  extends SQLiteOpenHelper {
         return habitMap;
     }
 
-    public void insertPlant(HashMap<String, String> queryValues) {
+
+    public ArrayList<HashMap<String, String>> getAllRewards() {
+
+        ArrayList<HashMap<String, String>> rewardArrayList;
+        rewardArrayList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "SELECT  * FROM rewards";
 
         SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
 
-        // Stores key value pairs being the column name and the data
-        // ContentValues data type is needed because the database
-        // requires its data type to be passed
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> rewardMap = new HashMap<String, String>();
 
-        ContentValues values = new ContentValues();
+                rewardMap.put("plantId", cursor.getString(0));
+                rewardMap.put("title", cursor.getString(1));
+                rewardMap.put("price", cursor.getString(2));
 
-        values.put("title", queryValues.get("title"));
-        values.put("description", queryValues.get("description"));
-        values.put("price", queryValues.get("price"));
-        values.put("oxygenRate", queryValues.get("oxygenRate"));
-        values.put("waterCost", queryValues.get("waterCost"));
-        values.put("pictureId", queryValues.get("pictureId"));
+                rewardArrayList.add(rewardMap);
+            } while (cursor.moveToNext());
+        }
 
-        database.insert("plants", null, values);
-
-        database.close();
+        return rewardArrayList;
     }
 
-    public int updatePlant(HashMap<String, String> queryValues) {
-
-        // Open a database for reading and writing
-
-        SQLiteDatabase database = this.getWritableDatabase();
-
-        // Stores key value pairs being the column name and the data
-
-        ContentValues values = new ContentValues();
-
-        values.put("title", queryValues.get("title"));
-        values.put("description", queryValues.get("description"));
-        values.put("price", queryValues.get("price"));
-        values.put("oxygenRate", queryValues.get("oxygenRate"));
-        values.put("waterCost", queryValues.get("waterCost"));
-        values.put("pictureId", queryValues.get("pictureId"));
-
-        // update(TableName, ContentValueForTable, WhereClause, ArgumentForWhereClause)
-
-        return database.update("plants", values, "plantId" + " = ?", new String[] { queryValues.get("plantId") });
-    }
-
-    public void deletePlant(String id) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        String deleteQuery = "DELETE FROM  plants where plantId='"+ id +"'";
-        database.execSQL(deleteQuery);
-    }
 
     public ArrayList<HashMap<String, String>> getAllPlants() {
 
@@ -289,7 +280,7 @@ public class DBTools  extends SQLiteOpenHelper {
                 plantMap.put("pictureId", cursor.getString(6));
 
                 plantArrayList.add(plantMap);
-            } while (cursor.moveToNext()); // Move Cursor to the next row
+            } while (cursor.moveToNext());
         }
 
         return plantArrayList;

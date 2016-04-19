@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity
 
         //Pull habits from database and store in habitList
         ArrayList<HashMap<String, String>> habitList = dbTools.getAllHabits();
-        //TODO: Did commenting this break anything?
-//        dbTools.getAllHabits();
 
         //If there are habits fill the habit listView
         if(habitList.size() != 0) {
@@ -200,14 +198,17 @@ public class MainActivity extends AppCompatActivity
                 // Handle the camera action
                 intent = new Intent(getApplication(), MainActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_environment:
                 intent = new Intent(getApplication(), Environment.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_rewards:
                 intent = new Intent(getApplication(), Rewards.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_manage:
                 break;
