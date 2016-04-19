@@ -25,20 +25,20 @@ public class Rewards extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rewards);
 
-        ArrayList<HashMap<String, String>> plantList = dbTools.getAllPlants();
-
-        //TODO: Populate reward list
-        // should plant and reward db be consolidated with field
-        //isPlant or isReward in order to better populate this listView?
-        if(plantList.size() != 0) {
-            ListView listView = (ListView) findViewById(android.R.id.list);
-
-            CustomListAdapter adapter = new CustomListAdapter(
-                    this, plantList, R.layout.habit_entry, new String[]{"habitId", "habitId", "title", "difficulty", "frequency"}, new int[]{
-                    R.id.habitId1, R.id.habitId2, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
-
-            listView.setAdapter(adapter);
-        }
+//        ArrayList<HashMap<String, String>> plantList = dbTools.getAllPlants();
+//
+//        //TODO: Populate reward list after merging with master (need new DBTools)
+//        // should plant and reward db be consolidated with field
+//        //isPlant or isReward in order to better populate this listView?
+//        if(plantList.size() != 0) {
+//            ListView listView = (ListView) findViewById(android.R.id.list);
+//
+//            CustomListAdapter adapter = new CustomListAdapter(
+//                    this, plantList, R.layout.habit_entry, new String[]{"habitId", "habitId", "title", "difficulty", "frequency"}, new int[]{
+//                    R.id.habitId1, R.id.habitId2, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
+//
+//            listView.setAdapter(adapter);
+//        }
     }
 
     public void callMainActivity(View view) {
