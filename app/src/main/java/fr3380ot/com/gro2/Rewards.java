@@ -24,7 +24,7 @@ public class Rewards extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rewards);
+        setContentView(R.layout.real_rewards);
 
         ArrayList<HashMap<String, String>> plantList = dbTools.getAllPlants();
         ArrayList<HashMap<String, String>> rewardList = dbTools.getAllRewards();
@@ -33,19 +33,19 @@ public class Rewards extends AppCompatActivity{
         ArrayList<HashMap<String, String>> totalList = new ArrayList<>();
         totalList.addAll(plantList);
         totalList.addAll(rewardList);
-//
-//        //TODO: Populate reward list after merging with master (need new DBTools)
-//        // should plant and reward db be consolidated with field
-//        //isPlant or isReward in order to better populate this listView?
-//        if(plantList.size() != 0) {
-//            ListView listView = (ListView) findViewById(android.R.id.list);
-//
-//            CustomListAdapter adapter = new CustomListAdapter(
-//                    this, plantList, R.layout.habit_entry, new String[]{"habitId", "habitId", "title", "difficulty", "frequency"}, new int[]{
-//                    R.id.habitId1, R.id.habitId2, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
-//
-//            listView.setAdapter(adapter);
-//        }
+
+        // should plant and reward db be consolidated with field
+        //isPlant or isReward in order to better populate this listView?
+        if(totalList.size() != 0) {
+            ListView listView = (ListView) findViewById(R.id.rewardListView);
+
+            //TODO: Debug binding pictureId.
+            CustomListAdapter adapter = new CustomListAdapter(
+                    this, totalList, R.layout.reward_entry, new String[]{"plantId", "plantId", "title", "price"}, new int[]{
+                    R.id.plantId1, R.id.plantId2, R.id.rewardTitle, R.id.price});
+
+            listView.setAdapter(adapter);
+        }
     }
 
     public void callMainActivity(View view) {

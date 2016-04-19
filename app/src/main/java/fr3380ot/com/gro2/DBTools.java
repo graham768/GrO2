@@ -47,7 +47,7 @@ public class DBTools  extends SQLiteOpenHelper {
         //TODO: If customListAdapter returns null error for ImageView or picId, add picId here
         String rewards = "CREATE TABLE rewards ( plantId INTEGER PRIMARY KEY, " +
                                                 "title TEXT, " +
-                                                "price TEXT,)";
+                                                "price TEXT)";
 
         String plants = "CREATE TABLE plants ( plantId INTEGER PRIMARY KEY, " +
                                                 "title TEXT, " +
@@ -77,6 +77,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
 
         database.execSQL(habits);
+        database.execSQL(rewards);
         database.execSQL(plants);
         database.execSQL(tile);
         database.execSQL(user);
