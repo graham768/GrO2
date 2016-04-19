@@ -26,7 +26,13 @@ public class Rewards extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rewards);
 
-//        ArrayList<HashMap<String, String>> plantList = dbTools.getAllPlants();
+        ArrayList<HashMap<String, String>> plantList = dbTools.getAllPlants();
+        ArrayList<HashMap<String, String>> rewardList = dbTools.getAllRewards();
+
+        //Create a list containing both table elements to adapt them to the rewards ListView
+        ArrayList<HashMap<String, String>> totalList = new ArrayList<>();
+        totalList.addAll(plantList);
+        totalList.addAll(rewardList);
 //
 //        //TODO: Populate reward list after merging with master (need new DBTools)
 //        // should plant and reward db be consolidated with field
