@@ -81,6 +81,16 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
                 if(context instanceof MainActivity){
                     ((MainActivity)context).habitCheckIn(habitIdValue);
                 }
+                break;
+
+            case R.id.tableRowReward:
+                Log.d("Reward", "Reward clicked");
+                break;
+
+            case R.id.tableRowPurchase:
+                Log.d("Reward", "Purchase clicked");
+                break;
+
             default:
                 break;
         }
