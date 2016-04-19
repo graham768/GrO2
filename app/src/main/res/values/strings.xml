@@ -33,4 +33,6 @@
         <item name="monthly">Monthly</item>
     </string-array>
 
+    <string name="rewards">Rewards</string>
+
 </resources>

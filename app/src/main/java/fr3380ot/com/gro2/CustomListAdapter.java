@@ -27,7 +27,6 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
     Context context;
     Intent intent;
     TextView habitId;
-    TableRow tableRow;
 
     public CustomListAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
@@ -38,11 +37,24 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = super.getView(position, convertView, parent);
 
-        v.findViewById(R.id.tableRow)
-                .setOnClickListener(this);
+        //Check if list adapter for Rewards.java
+        if(v.getContext() instanceof Rewards) {
+            Log.d("Context is instanceof", "Rewards");
+            v.findViewById(R.id.tableRowReward)
+                    .setOnClickListener(this);
+            v.findViewById(R.id.tableRowPurchase)
+                    .setOnClickListener(this);
+        }
 
-        v.findViewById(R.id.tableRowPlus)
-                .setOnClickListener(this);
+        //Check if list adapter for MainActivity.java
+        else if(v.getContext() instanceof MainActivity) {
+            Log.d("Context is instanceof", "MainActivity");
+            v.findViewById(R.id.tableRow)
+                    .setOnClickListener(this);
+
+            v.findViewById(R.id.tableRowPlus)
+                    .setOnClickListener(this);
+        }
 
         return v;
     }
@@ -51,6 +63,8 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
     public void onClick(View v) {
         String habitIdValue;
         switch (v.getId()) {
+
+            //Title clicked - launches editHabit
             case R.id.tableRow:
                 habitId = (TextView) v.findViewById(R.id.habitId2);
                 habitIdValue = habitId.getText().toString();
@@ -63,6 +77,8 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
                 context.startActivity(intent);
 
                 break;
+
+            //Plus clicked - launches MainActivity.habitCheckIn() for habit clicked
             case R.id.tableRowPlus:
                 Timer timer = new Timer();
                 DailyTimer dailyTimer = new DailyTimer(v.findViewById(R.id.habitId1));
@@ -76,6 +92,16 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
                         timer.schedule(dailyTimer,5000);
                     }
                 }
+                break;
+
+            case R.id.tableRowReward:
+                Log.d("Reward", "Reward clicked");
+                break;
+
+            case R.id.tableRowPurchase:
+                Log.d("Reward", "Purchase clicked");
+                break;
+
             default:
                 break;
         }
