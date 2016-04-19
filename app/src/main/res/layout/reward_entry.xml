@@ -5,7 +5,7 @@
 
 
     <TableRow
-        android:layout_width="match_parent"
+        android:layout_width="285dp"
         android:layout_height="?android:attr/listPreferredItemHeight"
         android:id="@+id/tableRowReward">
 
@@ -21,32 +21,36 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:id="@+id/pictureId"
-            android:src="@mipmap/ic_sunflower_seeds"
-            android:layout_marginRight="150dp" />
+            android:src="@mipmap/ic_sunflower_seeds" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="20sp"
             android:text="Title"
             android:id="@+id/rewardTitle" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="25 o2"
-            android:id="@+id/cost"
-            android:layout_marginRight="20dp"
-            android:textColor="#13c3ef" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:paddingBottom="5dp"
+        android:layout_toRightOf="@id/tableRowReward"
+        android:id="@+id/tableRowPurchase">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Purchase!"
+            android:text="Price"
             android:id="@+id/purchaseButton"
             android:onClick="purchaseSunflower"
             android:background="#f4d009" />
-
     </TableRow>
 
 </RelativeLayout>

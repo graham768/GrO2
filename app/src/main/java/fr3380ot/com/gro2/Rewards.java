@@ -11,15 +11,34 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Rewards extends AppCompatActivity{
+
     DBTools dbTools = new DBTools(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rewards);
+
+        ArrayList<HashMap<String, String>> plantList = dbTools.getAllPlants();
+
+        //TODO: Populate reward list
+        // should plant and reward db be consolidated with field
+        //isPlant or isReward in order to better populate this listView?
+        if(plantList.size() != 0) {
+            ListView listView = (ListView) findViewById(android.R.id.list);
+
+            CustomListAdapter adapter = new CustomListAdapter(
+                    this, plantList, R.layout.habit_entry, new String[]{"habitId", "habitId", "title", "difficulty", "frequency"}, new int[]{
+                    R.id.habitId1, R.id.habitId2, R.id.habitTitle, R.id.habitDifficulty, R.id.habitFrequency});
+
+            listView.setAdapter(adapter);
+        }
     }
 
     public void callMainActivity(View view) {

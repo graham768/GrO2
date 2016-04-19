@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity
 
     DBTools dbTools = new DBTools(this);
     Intent intent;
-    TextView habitId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,8 @@ public class MainActivity extends AppCompatActivity
 
         //Pull habits from database and store in habitList
         ArrayList<HashMap<String, String>> habitList = dbTools.getAllHabits();
-        dbTools.getAllHabits();
+        //TODO: Did commenting this break anything?
+//        dbTools.getAllHabits();
 
         //If there are habits fill the habit listView
         if(habitList.size() != 0) {
