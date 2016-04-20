@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -60,6 +61,30 @@ public class Environment extends MainActivity implements NavigationView.OnNaviga
         env21 = (ImageView) findViewById(R.id.env21);
         env22 = (ImageView) findViewById(R.id.env22);
 
+
+        ArrayList<HashMap<String, String>> plantList = dbTools.getAllPlants();
+        dbTools.updateTile("1","1");
+
+        HashMap<String, String> tileMap = dbTools.getTile("1");
+        String plantId = tileMap.get("plantId");
+        if (plantId.equals("0")) {
+        }
+        else {
+            for (int i = 0; i < plantList.size(); i++) {
+                if (plantList.get(i).get("plantId").equals(plantId)) {
+                    HashMap<String, String> plant = plantList.get(i);
+                    String image = "0";
+                    if (tileMap.get("growthLevel").equals("0")) {
+                        image = plant.get("youngId");
+                    }
+                    else if (tileMap.get("growthLevel").equals("1")) {
+                        image = plant.get("grownId");
+                    }
+                    int imageId = Integer.parseInt(image);
+                    env00.setImageResource(imageId);
+                }
+            }
+        }
     }
 
     public void callMainActivity(View view) {

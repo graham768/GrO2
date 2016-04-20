@@ -75,7 +75,7 @@ public class DBTools  extends SQLiteOpenHelper {
 
         String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'seedId', 'youngId', 'grownId') " +
                                  "VALUES ('Sunflower', 'A cute sunflower', '25', '2','3'," +
-                                 "'R.mipmap.ic_sunflower_seeds','1','1')";
+                                 "'2130903048', '2130903049', '2130903047')";
 
         String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'seedId', 'youngId', 'grownId') " +
                                 "VALUES ('Camellia', 'A lovely Camellia','50', '4','7'," +
@@ -83,7 +83,9 @@ public class DBTools  extends SQLiteOpenHelper {
 
         String chrysanthemumInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'seedId', 'youngId', 'grownId') " +
                                      "VALUES ('Chrysanthemum', 'A beautiful Chrysanthemum','75', '8','10'," +
-                                     "'R.mipmap.ic_chrysanthemum_seeds','3','3')";
+                                     "'R.mipmap.ic_chrysanthemum_seeds', '3', '3')";
+
+        String tileInsert = "INSERT INTO tile ('plantId', 'growthLevel') VALUES ('1', '0')";
 
 
         database.execSQL(habits);
@@ -95,6 +97,7 @@ public class DBTools  extends SQLiteOpenHelper {
         database.execSQL(sunflowerInsert);
         database.execSQL(camelliaInsert);
         database.execSQL(chrysanthemumInsert);
+        addTiles(database);
 
     }
 
@@ -117,6 +120,12 @@ public class DBTools  extends SQLiteOpenHelper {
         database.execSQL(tile);
         database.execSQL(user);
         onCreate(database);
+    }
+
+    public void addTiles(SQLiteDatabase database) {
+        for (int i = 0; i < 9; i++) {
+            database.execSQL("INSERT INTO tile ('plantId', 'growthLevel') VALUES ('0', '0')");
+        }
     }
 
 
@@ -351,6 +360,19 @@ public class DBTools  extends SQLiteOpenHelper {
         database.close();
 
         return 0;
+    }
+
+    public void updateTile(String tileId, String plantId) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String findTile = "SELECT * FROM tile where tileId='"+tileId+"'";
+        Cursor cursor = database.rawQuery(findTile, null);
+        cursor.moveToFirst();
+
+        ContentValues values = new ContentValues();
+        values.put("plantId", plantId);
+
+        database.update("tile", values, "tileId='" + tileId + "'", null);
+        database.close();
     }
 
     public HashMap<String, String> getTile(String id){

@@ -195,7 +195,6 @@ public class MainActivity extends AppCompatActivity
         switch(item.getItemId()){
 
             case R.id.nav_habits:
-                // Handle the camera action
                 intent = new Intent(getApplication(), MainActivity.class);
                 startActivity(intent);
                 finish();
