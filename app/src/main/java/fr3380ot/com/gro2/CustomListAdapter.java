@@ -23,6 +23,7 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
     Context context;
     Intent intent;
     TextView habitId;
+    TextView plantId;
 
     public CustomListAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
@@ -58,6 +59,8 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
     @Override
     public void onClick(View v) {
         String habitIdValue;
+        String plantIdValue;
+
         switch (v.getId()) {
 
             //Title clicked - launches editHabit
@@ -89,6 +92,11 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
 
             case R.id.tableRowPurchase:
                 Log.d("Reward", "Purchase clicked");
+                plantId = (TextView) v.findViewById(R.id.plantId2);
+                plantIdValue = plantId.getText().toString();
+                if(context instanceof MainActivity){
+                    ((Rewards)context).purchase(plantIdValue);
+                }
                 break;
 
             default:
