@@ -55,7 +55,18 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
 
             v.findViewById(R.id.tableRowPlus)
                     .setOnClickListener(this);
+
+            DBTools dbTools = new DBTools((MainActivity) context);
+            habitId = (TextView) v.findViewById(R.id.habitId1);
+            String habitIdValue = habitId.getText().toString();
+            HashMap<String, String> habit = dbTools.getHabitInfo(habitIdValue);
+            if (habit.get("available").equals("1")){
+                v.findViewById(R.id.plus).setBackgroundColor(Color.parseColor("#9bfcff"));
+            }else{
+                v.findViewById(R.id.plus).setBackgroundColor(Color.parseColor("#D3D3D3"));
+            }
         }
+
 
         return v;
     }
@@ -92,7 +103,7 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
                     boolean result = ((MainActivity) context).habitCheckIn(habitIdValue);
                     if (result){
                         v.findViewById(R.id.plus).setBackgroundColor(Color.parseColor("#D3D3D3"));
-                        timer.schedule(dailyTimer,5000);
+                        timer.schedule(dailyTimer,0);
                     }
                 }
                 break;
@@ -129,9 +140,35 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
             habit = dbTools.getHabitInfo(habitIdValue);
         }
 
-        public void run(){
+        public void run() {
             habit.put("available", "1");
+            String frequency = habit.get("frequency");
+            switch(frequency){
+                case "Daily":
+                    try{
+                        Thread.sleep(15*1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "Weekly":
+                    try{
+                        Thread.sleep(30*1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "Monthly":
+                    try{
+                        Thread.sleep(60*1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+            }
             dbTools.updateHabit(habit);
+
         }
     }
 
