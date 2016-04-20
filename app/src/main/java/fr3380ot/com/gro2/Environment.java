@@ -126,4 +126,5 @@ public class Environment extends MainActivity implements NavigationView.OnNaviga
         user.put("oxygenLevel",Integer.toString(oxygen));
         dbTools.updateUser(user);
     }
+
 }
