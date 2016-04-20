@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#e9f891">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/rewards"
-        android:id="@+id/textView11" />
+        android:id="@+id/textView11"
+        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:listSelector="#ffffff"
-        android:id="@+id/rewardListView" />
+        android:id="@+id/rewardListView"
+        android:background="#f3ffeb" />
 
 </LinearLayout>
