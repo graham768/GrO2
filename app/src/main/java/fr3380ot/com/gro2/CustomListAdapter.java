@@ -95,7 +95,7 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
             //Plus clicked - launches MainActivity.habitCheckIn() for habit clicked
             case R.id.tableRowPlus:
                 Timer timer = new Timer();
-                DailyTimer dailyTimer = new DailyTimer(v.findViewById(R.id.habitId1));
+                DailyTimer dailyTimer = new DailyTimer(v);
                 habitId = (TextView) v.findViewById(R.id.habitId1);
                 habitIdValue = habitId.getText().toString();
                 Log.d("onClick", habitIdValue);
@@ -134,10 +134,11 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
         TextView habitId;
         String habitIdValue;
 
-        public DailyTimer(View id){
-            habitId = (TextView) id.findViewById(R.id.habitId1);
+        public DailyTimer(View v){
+            habitId = (TextView) v.findViewById(R.id.habitId1);
             habitIdValue = habitId.getText().toString();
             habit = dbTools.getHabitInfo(habitIdValue);
+            vPlus = v;
         }
 
         public void run() {
@@ -146,21 +147,21 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
             switch(frequency){
                 case "Daily":
                     try{
-                        Thread.sleep(15*1000);
+                        Thread.sleep(5*1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     break;
                 case "Weekly":
                     try{
-                        Thread.sleep(30*1000);
+                        Thread.sleep(10*1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     break;
                 case "Monthly":
                     try{
-                        Thread.sleep(60*1000);
+                        Thread.sleep(20*1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
