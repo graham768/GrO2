@@ -55,13 +55,14 @@ public class DBTools  extends SQLiteOpenHelper {
                                                 "description TEXT, " +
                                                 "price TEXT, " +
                                                 "oxygenRate TEXT, " +
-                                                "waterCost TEXT,"  +
-                                                "pictureId TEXT)";
+                                                "waterCost TEXT, " +
+                                                "seedId TEXT, " +
+                                                "youngId TEXT, " +
+                                                "grownId TEXT)";
 
         String tile = "CREATE TABLE tile ( tileId INTEGER PRIMARY KEY, " +
-                                                        "plantId TEXT," +
-                                                        "growthLevel TEXT" +
-                                                        ")";
+                                          "plantId TEXT," +
+                                          "growthLevel TEXT)";
 
         String user = "CREATE TABLE user ( userId INTEGER PRIMARY KEY, " +
                                           "name TEXT, " +
@@ -72,9 +73,18 @@ public class DBTools  extends SQLiteOpenHelper {
         // or if the query doesn't return any data
         // Hard code these initially into the DB so they exist on installation
         String userInsert = "INSERT INTO user ('name', 'waterLevel', 'oxygenLevel') VALUES ('John Smith', '0', '100')";
-        String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Sunflower', 'A cute sunflower', '25', '2','3','1')";
-        String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Camellia', 'A lovely Camellia','50', '4','7','2')";
-        String chrysanthemumInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'pictureId') VALUES ('Chrysanthemum', 'A beautiful Chrysanthemum','75', '8','10','3')";
+
+        String sunflowerInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'seedId', 'youngId', 'grownId') " +
+                                 "VALUES ('Sunflower', 'A cute sunflower', '25', '2','3'," +
+                                 "'R.mipmap.ic_sunflower_seeds','1','1')";
+
+        String camelliaInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'seedId', 'youngId', 'grownId') " +
+                                "VALUES ('Camellia', 'A lovely Camellia','50', '4','7'," +
+                                "'R.mipmap.ic_camellia_seeds', '2', '2')";
+
+        String chrysanthemumInsert = "INSERT INTO plants ('title', 'description', 'price', 'oxygenRate', 'waterCost', 'seedId', 'youngId', 'grownId') " +
+                                     "VALUES ('Chrysanthemum', 'A beautiful Chrysanthemum','75', '8','10'," +
+                                     "'R.mipmap.ic_chrysanthemum_seeds','3','3')";
 
 
         database.execSQL(habits);
@@ -282,7 +292,9 @@ public class DBTools  extends SQLiteOpenHelper {
                 plantMap.put("price", cursor.getString(3));
                 plantMap.put("oxygenRate", cursor.getString(4));
                 plantMap.put("waterCost", cursor.getString(5));
-                plantMap.put("pictureId", cursor.getString(6));
+                plantMap.put("seedId", cursor.getString(6));
+                plantMap.put("youngId", cursor.getString(7));
+                plantMap.put("grownId", cursor.getString(8));
 
                 plantArrayList.add(plantMap);
             } while (cursor.moveToNext());
@@ -312,7 +324,9 @@ public class DBTools  extends SQLiteOpenHelper {
                 plantMap.put("price", cursor.getString(3));
                 plantMap.put("oxygenRate", cursor.getString(4));
                 plantMap.put("waterCost", cursor.getString(5));
-                plantMap.put("pictureId", cursor.getString(6));
+                plantMap.put("seedId", cursor.getString(6));
+                plantMap.put("youngId", cursor.getString(7));
+                plantMap.put("grownId", cursor.getString(8));
 
             } while (cursor.moveToNext());
         }

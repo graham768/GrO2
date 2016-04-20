@@ -71,29 +71,32 @@ public class Rewards extends MainActivity implements NavigationView.OnNavigation
     }
 
     //TODO: implement single purchase method to be run onClick R.id.tableRowPurchase
-//    public void purchaseSunflower(View v){
-//        HashMap<String, String> user = dbTools.getUserInfo();
-//        int oxygen = Integer.parseInt(user.get("oxygenLevel"));
-//        int result = -1;
-//        if (oxygen >=  25){
-//            oxygen-=25;
-//            HashMap<String, String> plant = dbTools.getPlantInfo("1");
-//            result = dbTools.insertTile(plant);
-//            user.put("oxygenLevel", Integer.toString(oxygen));
-//            dbTools.updateUser(user);
-//        }
-//        switch(result){
-//            case -1:
-//                Log.d("Purchase Sunflower", "Failure");
-//                break;
-//            case 0:
-//                Log.d("Purchase Sunflower", "Success");
-//                break;
-//            default:
-//                Log.d("Purchase Sunflower", "Failure");
-//                break;
-//        }
-//    }
+    public void purchase(String plantId){
+
+        HashMap<String, String> user = dbTools.getUserInfo();
+        HashMap<String, String> plant = dbTools.getPlantInfo(plantId);
+        int price = Integer.parseInt(plant.get("price"));
+
+        int oxygen = Integer.parseInt(user.get("oxygenLevel"));
+        int result = -1;
+        if (oxygen >=  price){
+            oxygen-= price;
+            result = dbTools.insertTile(plant);
+            user.put("oxygenLevel", Integer.toString(oxygen));
+            dbTools.updateUser(user);
+        }
+        switch(result){
+            case -1:
+                Log.d("Purchase Sunflower", "Failure");
+                break;
+            case 0:
+                Log.d("Purchase Sunflower", "Success");
+                break;
+            default:
+                Log.d("Purchase Sunflower", "Failure");
+                break;
+        }
+    }
 //
 //    public void purchaseCamellia(View v){
 //        HashMap<String, String> user = dbTools.getUserInfo();
