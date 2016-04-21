@@ -415,6 +415,30 @@ public class DBTools  extends SQLiteOpenHelper {
 
     }
 
+    public HashMap<String, String> getRewardInfo(String id) {
+        HashMap<String, String> rewardMap = new HashMap<String, String>();
+
+        // Open a database for reading only
+
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        String selectQuery = "SELECT * FROM plants where plantId='"+id+"'";
+
+        // rawQuery executes the query and returns the result as a Cursor
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                rewardMap.put("plantId", cursor.getString(0));
+                rewardMap.put("title", cursor.getString(1));
+                rewardMap.put("price", cursor.getString(2));
+
+            } while (cursor.moveToNext());
+        }
+        return rewardMap;
+    }
+
     public void insertReward(HashMap<String, String> queryValues) {
 
         SQLiteDatabase database = this.getWritableDatabase();
@@ -431,5 +455,31 @@ public class DBTools  extends SQLiteOpenHelper {
         database.insert("rewards", null, values);
 
         database.close();
+    }
+
+    public int updateReward(HashMap<String, String> queryValues) {
+
+        // Open a database for reading and writing
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // Stores key value pairs being the column name and the data
+
+        ContentValues values = new ContentValues();
+
+        values.put("title", queryValues.get("title"));
+        values.put("price", queryValues.get("price"));
+
+        // update(TableName, ContentValueForTable, WhereClause, ArgumentForWhereClause)
+
+        return database.update("rewards", values, "plantId" + " = ?", new String[] { queryValues.get("plantId") });
+    }
+
+    public void deleteReward(String id) {
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        String deleteQuery = "DELETE FROM rewards where plantId='"+ id +"'";
+        database.execSQL(deleteQuery);
+
     }
 }

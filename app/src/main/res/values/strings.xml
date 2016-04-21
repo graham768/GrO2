@@ -35,6 +35,7 @@
 
     <string name="rewards">Rewards</string>
     <string name="add_reward">Add New Reward</string>
+    <string name="edit_reward">Edit Reward</string>
     <string name="price">Price</string>
 
 </resources>

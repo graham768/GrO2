@@ -14,9 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@string/add_reward"
+            android:text="@string/edit_reward"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/addReward"
+            android:id="@+id/editReward"
             android:textColor="#FFFFFF"/>
     </TableRow>
 
@@ -80,18 +80,26 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="addReward"
-            android:text="@string/save"
-            android:id="@+id/add_button"
-            android:layout_weight="1" />
+            android:onClick="editReward"
+            android:text="@string/edit"
+            android:id="@+id/editButton"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="removeReward"
+            android:text="@string/delete"
+            android:id="@+id/delete_button"
+            android:layout_weight="1"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="callRewardActivity"
             android:text="@string/cancel"
-            android:id="@+id/cancel_button"
-            android:layout_weight="1" />
+            android:id="@+id/button"
+            android:layout_weight="1"/>
     </TableRow>
 
 </TableLayout>

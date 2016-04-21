@@ -85,7 +85,14 @@ public class CustomListAdapter extends SimpleAdapter implements View.OnClickList
                 break;
 
             case R.id.tableRowReward:
-                Log.d("Reward", "Reward clicked");
+                plantId = (TextView) v.findViewById(R.id.plantId1);
+                plantIdValue = plantId.getText().toString();
+
+                intent = new Intent(context.getApplicationContext(), EditReward.class);
+
+                intent.putExtra("plantId", plantIdValue);
+
+                context.startActivity(intent);
                 break;
 
             case R.id.tableRowPurchase:
