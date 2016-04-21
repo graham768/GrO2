@@ -34,5 +34,7 @@
     </string-array>
 
     <string name="rewards">Rewards</string>
+    <string name="add_reward">Add New Reward</string>
+    <string name="price">Price</string>
 
 </resources>

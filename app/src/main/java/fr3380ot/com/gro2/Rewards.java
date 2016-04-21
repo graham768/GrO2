@@ -64,11 +64,6 @@ public class Rewards extends MainActivity implements NavigationView.OnNavigation
         }
     }
 
-    public void callMainActivity(View view) {
-        Intent intent = new Intent(getApplication(), MainActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
 
     //TODO: implement single purchase method to be run onClick R.id.tableRowPurchase
     public void purchase(String plantId){
@@ -97,53 +92,15 @@ public class Rewards extends MainActivity implements NavigationView.OnNavigation
                 break;
         }
     }
-//
-//    public void purchaseCamellia(View v){
-//        HashMap<String, String> user = dbTools.getUserInfo();
-//        int oxygen = Integer.parseInt(user.get("oxygenLevel"));
-//        int result = -1;
-//        if (oxygen >=  50){
-//            oxygen-=50;
-//            HashMap<String, String> plant = dbTools.getPlantInfo("2");
-//            result = dbTools.insertTile(plant);
-//            user.put("oxygenLevel", Integer.toString(oxygen));
-//            dbTools.updateUser(user);
-//        }
-//        switch(result){
-//            case -1:
-//                Log.d("Purchase Camellia", "Failure");
-//                break;
-//            case 0:
-//                Log.d("Purchase Camellia", "Success");
-//                break;
-//            default:
-//                Log.d("Purchase Camellia", "Failure");
-//                break;
-//        }
-//
-//    }
-//
-//    public void purchaseChrysanthemum(View v){
-//        HashMap<String, String> user = dbTools.getUserInfo();
-//        int oxygen = Integer.parseInt(user.get("oxygenLevel"));
-//        int result = -1;
-//        if (oxygen >=  75){
-//            oxygen-=75;
-//            HashMap<String, String> plant = dbTools.getPlantInfo("3");
-//            result = dbTools.insertTile(plant);
-//            user.put("oxygenLevel", Integer.toString(oxygen));
-//            dbTools.updateUser(user);
-//        }
-//        switch(result){
-//            case -1:
-//                Log.d("Purchase Chrysanthemum", "Failure");
-//                break;
-//            case 0:
-//                Log.d("Purchase Chrysanthemum", "Success");
-//                break;
-//            default:
-//                Log.d("Purchase Chrysanthemum", "Failure");
-//                break;
-//        }
-//    }
+
+    //TODO: Finish addReward()
+    public void addReward(){
+
+    }
+
+    public void callRewardActivity(View view) {
+        Intent intent = new Intent(getApplication(), Rewards.class);
+        startActivity(intent);
+        this.finish();
+    }
 }
