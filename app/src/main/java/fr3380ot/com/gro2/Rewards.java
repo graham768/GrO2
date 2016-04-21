@@ -2,6 +2,7 @@ package fr3380ot.com.gro2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,6 +31,18 @@ public class Rewards extends MainActivity implements NavigationView.OnNavigation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rewards);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), AddReward.class);
+                startActivity(intent);
+                //TODO: Replace finish() with something appropriate.
+                // This is probably incorrect and reloads the cache every time we recreate main.
+                finish();
+            }
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -49,6 +62,11 @@ public class Rewards extends MainActivity implements NavigationView.OnNavigation
         ArrayList<HashMap<String, String>> totalList = new ArrayList<>();
         totalList.addAll(plantList);
         totalList.addAll(rewardList);
+
+        for(int i=0; i < totalList.size(); i++) {
+            Log.d("totalList", totalList.get(i).toString());
+        }
+
 
         // should plant and reward db be consolidated with field
         //isPlant or isReward in order to better populate this listView?

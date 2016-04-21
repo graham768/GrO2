@@ -414,4 +414,22 @@ public class DBTools  extends SQLiteOpenHelper {
         return database.update("user", values, "userId" + " = ?", new String[] {user.get("userId")});
 
     }
+
+    public void insertReward(HashMap<String, String> queryValues) {
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        // Stores key value pairs being the column name and the data
+        // ContentValues data type is needed because the database
+        // requires its data type to be passed
+
+        ContentValues values = new ContentValues();
+
+        values.put("title", queryValues.get("title"));
+        values.put("price", queryValues.get("price"));
+
+        database.insert("rewards", null, values);
+
+        database.close();
+    }
 }
